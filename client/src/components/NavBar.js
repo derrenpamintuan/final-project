@@ -19,9 +19,39 @@ export default function Navbar() {
   return (
     <>
       <nav>
-        <h1 className="nav-title">Fine-Dine</h1>
-        <IoRestaurant className="io-restaurant" />
+        <h1 className="nav-title">
+          Fine-Dine <IoRestaurant className="io-restaurant" />
+        </h1>
         {user && <FaBars className="fa-bars" onClick={handleMenu} />}
+        {user && (
+          <div className="full-screen-options">
+            {' '}
+            <p
+              className="menu-options"
+              onClick={() => {
+                navigate('/');
+              }}>
+              <IoHomeSharp className="menu-icon" />
+              Home
+            </p>
+            <p
+              className="menu-options"
+              onClick={() => {
+                navigate('/saved');
+              }}>
+              <FaHeart className="menu-icon" />
+              Saved
+            </p>
+            <p
+              className="menu-options"
+              onClick={() => {
+                handleSignOut();
+              }}>
+              <FaSignOutAlt className="menu-icon" />
+              Sign Out
+            </p>{' '}
+          </div>
+        )}
       </nav>
       {isOpen && (
         <div className="menu-container">
@@ -37,7 +67,7 @@ export default function Navbar() {
           <p
             className="menu-options"
             onClick={() => {
-              // navigate('/saved');
+              navigate('/saved');
               handleMenu();
             }}>
             <FaHeart className="menu-icon" />

@@ -5,6 +5,7 @@ import NavBar from './components/NavBar';
 import Auth from './pages/AuthPage';
 import Home from './pages/HomePage';
 import NotFound from './pages/NotFoundPage';
+import { useNavigate } from 'react-router-dom';
 import './App.css';
 
 const tokenKey = 'react-context-jwt';
@@ -13,10 +14,11 @@ export default function App() {
   const [user, setUser] = useState();
   const [token, setToken] = useState();
   const [isAuthorizing, setIsAuthorizing] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const auth = localStorage.getItem(tokenKey);
-    console.log(auth);
+
     if (auth) {
       const a = JSON.parse(auth);
       setUser(a.user);
@@ -24,8 +26,6 @@ export default function App() {
     }
     setIsAuthorizing(false);
   }, []);
-
-  console.log(user);
 
   if (isAuthorizing) return null;
 
@@ -39,6 +39,7 @@ export default function App() {
     localStorage.removeItem(tokenKey);
     setUser(undefined);
     setToken(undefined);
+    navigate('/sign-in');
   }
 
   const contextValue = { user, token, handleSignIn, handleSignOut };

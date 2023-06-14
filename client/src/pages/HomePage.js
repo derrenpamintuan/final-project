@@ -11,5 +11,5 @@ export default function Home() {
   //   if (!user) navigate('/sign-in');
   // }, [user, navigate])
 
-  return <p>hello</p>;
+  return <h1>Home Page</h1>;
 }

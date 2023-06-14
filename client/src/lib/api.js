@@ -33,7 +33,6 @@ export async function signUpOrIn(action, email, password) {
     },
     body: JSON.stringify({ email, password }),
   };
-  console.log(req);
   const res = await fetch(`/api/auth/${action}`, req);
   if (!res.ok) throw new Error(`fetch Error ${res.status}`);
   return await res.json();

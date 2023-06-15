@@ -52,8 +52,10 @@ export default function AuthForm({ action, onSignIn }) {
           />
         </label>
       </div>
-      <div className="button">
-        <button type="submit">{submitButtonText}</button>
+      <div>
+        <button type="submit" className="submit-button">
+          {submitButtonText}
+        </button>
       </div>
       <div className="links">
         <small>

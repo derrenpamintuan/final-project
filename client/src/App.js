@@ -6,7 +6,6 @@ import Auth from './pages/AuthPage';
 import Home from './pages/HomePage';
 import NotFound from './pages/NotFoundPage';
 import { useNavigate } from 'react-router-dom';
-import './App.css';
 
 const tokenKey = 'react-context-jwt';
 

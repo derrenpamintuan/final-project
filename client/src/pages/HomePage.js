@@ -1,6 +1,7 @@
 // import { useContext, useEffect } from 'react';
 // import { useNavigate } from 'react-router-dom';
 // import AppContext from '../components/AppContext';
+import Search from '../components/SearchForm';
 import './HomePage.css';
 
 export default function Home() {
@@ -11,5 +12,14 @@ export default function Home() {
   //   if (!user) navigate('/sign-in');
   // }, [user, navigate])
 
-  return <h1>Home Page</h1>;
+  return (
+    <div className="search-page">
+      <header className="home-title">
+        <h1>Get Started</h1>
+      </header>
+      <div className="search-container">
+        <Search />
+      </div>
+    </div>
+  );
 }

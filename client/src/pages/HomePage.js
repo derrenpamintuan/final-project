@@ -2,6 +2,7 @@
 // import { useNavigate } from 'react-router-dom';
 // import AppContext from '../components/AppContext';
 import Search from '../components/SearchForm';
+import RestaurantList from '../components/RestaurantList';
 import './HomePage.css';
 
 export default function Home() {

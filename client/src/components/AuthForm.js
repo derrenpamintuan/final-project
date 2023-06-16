@@ -10,6 +10,8 @@ export default function AuthForm({ action, onSignIn }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const { username, password } = Object.fromEntries(formData.entries());
+    console.log(formData);
+    console.log(username, password);
     try {
       const result = await signUpOrIn(action, username, password);
       if (action === 'sign-up') {

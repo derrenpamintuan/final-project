@@ -1,0 +1,76 @@
+.search-results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+}
+
+.results-title {
+  flex-basis: 100%;
+}
+
+.search-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.result-container {
+  display: flex;
+  background-color: rgba(217, 217, 217, 1);
+  width: 290px;
+  padding: 5px;
+  border-radius: 7px;
+  margin-bottom: 5px;
+}
+
+img {
+  min-width: 100px;
+  width: 100px;
+  height: 75px;
+  object-fit: cover;
+  border-radius: 7px;
+  margin-right: 10px;
+}
+
+.restaurant-name {
+  margin: 5px 0;
+  font-size: small;
+  text-align: start;
+}
+
+.ratings-container {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.ratings {
+  color: rgba(255, 255, 0, 1);
+}
+
+.ratings,
+.ratings-empty {
+  margin-right: 1px;
+}
+
+.restaurant-reviews {
+  position: relative;
+  left: 5px;
+  top: 1px;
+  font-size: small;
+  margin: 0;
+}
+
+.restaurant-extra-details {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+p.details {
+  margin: 0;
+  font-size: small;
+}

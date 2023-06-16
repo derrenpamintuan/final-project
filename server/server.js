@@ -6,7 +6,6 @@ import argon2 from 'argon2';
 import ClientError from './lib/client-error.js';
 import jwt from 'jsonwebtoken';
 
-// eslint-disable-next-line no-unused-vars -- Remove when used
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {

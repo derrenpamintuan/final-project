@@ -14,11 +14,11 @@ export default function AuthPage({ action }) {
 
   const welcomeHeader = action === 'sign-in' ? 'Welcome' : 'Create an Account';
   return (
-    <div className="forms">
-      <header>
+    <div className="form-page">
+      <header className="form-title">
         <h1>{welcomeHeader}</h1>
       </header>
-      <div className="form-card">
+      <div className="form-container">
         <AuthForm key={action} action={action} onSignIn={handleSignIn} />
       </div>
     </div>

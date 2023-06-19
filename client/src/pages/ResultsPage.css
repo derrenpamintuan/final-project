@@ -1,0 +1,116 @@
+.search-results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  align-content: flex-start;
+  height: 100vh;
+  overflow-y: scroll;
+  background-image: url('https://media.istockphoto.com/id/1001851616/photo/abstract-blur-image-of-night-festival-in-a-restaurant-and-the-atmosphere-is-happy-and-relaxing.jpg?s=612x612&w=0&k=20&c=vRDFQeAsuHBDPBiehamNwsu4mke88lZXJfqfah0k8Jk=');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.search-list {
+  list-style-type: none;
+  margin: 0 0 25px;
+  padding: 0;
+}
+
+@media screen and (width >=650px) {
+  .search-list {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 620px;
+    justify-content: left;
+  }
+
+  .result-container {
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+}
+
+@media screen and (width >=1000px) {
+  .search-results {
+    height: 100vh;
+  }
+
+  .search-list {
+    max-width: 940px;
+  }
+}
+
+.result-container {
+  display: flex;
+  background-color: rgba(217, 217, 217, 1);
+  width: 300px;
+  padding: 5px;
+  border-radius: 7px;
+  margin-bottom: 5px;
+}
+
+img.restaurant-image {
+  min-width: 100px;
+  width: 100px;
+  height: 75px;
+  object-fit: cover;
+  border-radius: 7px;
+  margin-right: 10px;
+}
+
+.restaurant-name {
+  margin: 5px 0;
+  font-size: small;
+  text-align: start;
+}
+
+.ratings-container {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.ratings {
+  color: rgba(255, 255, 0, 1);
+}
+
+.ratings,
+.ratings-empty {
+  margin-right: 1px;
+}
+
+.restaurant-reviews {
+  position: relative;
+  left: 5px;
+  top: 1px;
+  font-size: small;
+  margin: 0;
+}
+
+.restaurant-extra-details {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+p.details {
+  margin: 0;
+  font-size: small;
+}
+
+div.no-results-container {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 0 10px 10px;
+}
+
+.return-home {
+  color: white;
+}

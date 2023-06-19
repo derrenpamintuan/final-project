@@ -14,8 +14,7 @@ nav {
 @media screen and (width >= 500px) {
   .nav-title {
     position: absolute;
-    left: 10px;
-    margin-left: 10px;
+    left: 30px;
   }
 }
 

@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import AppContext from './AppContext';
 import { BsStarFill, BsStar } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
 export default function RestaurantList() {
   const { restaurants } = useContext(AppContext);
@@ -100,7 +101,7 @@ export default function RestaurantList() {
       default:
         return (
           <>
-            <BsStar className="ratings-empty" />
+            <BsStarFill className="ratings" />
             <BsStar className="ratings-empty" />
             <BsStar className="ratings-empty" />
             <BsStar className="ratings-empty" />
@@ -111,11 +112,8 @@ export default function RestaurantList() {
   }
 
   function displayPrice(price) {
-    if (price === undefined) {
-      return '$';
-    } else {
-      return price;
-    }
+    if (price === undefined) return '$';
+    return price;
   }
 
   function metersToMiles(meters) {
@@ -123,19 +121,45 @@ export default function RestaurantList() {
     return Math.round(miles * 10) / 10;
   }
 
-  let resultNumber = 0;
+  let resultNumber = 1;
 
   function countResults() {
-    resultNumber++;
-    return resultNumber;
+    return resultNumber++;
+  }
+
+  function returnEmpty(restaurants) {
+    if (restaurants.length === 0) {
+      return (
+        <div className="no-results-container">
+          <p className="no-results">No results</p>
+          <Link className="return-home" to="/">
+            Return Home
+          </Link>
+        </div>
+      );
+    }
+    if (restaurants === undefined) {
+      return (
+        <div className="restaurants-undefined">
+          <p>I made it here</p>
+        </div>
+      );
+    }
+    console.log(restaurants);
+    console.log(restaurants.length);
   }
 
   return (
     <>
+      {returnEmpty(restaurants)}
       <ul className="search-list">
         {restaurants.map((restaurant) => (
           <li key={restaurant.id} className="result-container">
-            <img src={restaurant.image_url} alt="food, restaurant, or menu" />
+            <img
+              className="restaurant-image"
+              src={restaurant.image_url}
+              alt="Restaurant, Business, Food"
+            />
             <div className="restaurant-details">
               <p className="restaurant-name">
                 {countResults()}. {restaurant.name}

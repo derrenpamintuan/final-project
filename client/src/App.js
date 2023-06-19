@@ -11,6 +11,8 @@ import { useNavigate } from 'react-router-dom';
 const tokenKey = 'react-context-jwt';
 
 export default function App() {
+  const [location, setLocation] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
   const [user, setUser] = useState();
   const [token, setToken] = useState();
   const [isAuthorizing, setIsAuthorizing] = useState(true);
@@ -44,13 +46,18 @@ export default function App() {
   }
 
   const contextValue = {
+    location,
+    searchTerm,
     user,
     token,
     restaurants,
+    setLocation,
+    setSearchTerm,
     handleSignIn,
     handleSignOut,
     setRestaurants,
   };
+
   return (
     <AppContext.Provider value={contextValue}>
       <Routes>

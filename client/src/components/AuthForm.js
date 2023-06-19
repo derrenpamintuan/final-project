@@ -9,11 +9,9 @@ export default function AuthForm({ action, onSignIn }) {
   async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const { username, password } = Object.fromEntries(formData.entries());
-    console.log(formData);
-    console.log(username, password);
+    const { email, password } = Object.fromEntries(formData.entries());
     try {
-      const result = await signUpOrIn(action, username, password);
+      const result = await signUpOrIn(action, email, password);
       if (action === 'sign-up') {
         navigate('/sign-in');
       } else if (result.user && result.token) {
@@ -28,6 +26,10 @@ export default function AuthForm({ action, onSignIn }) {
   const alternateActionText =
     action === 'sign-up' ? 'Sign in instead' : 'Create a account';
   const submitButtonText = action === 'sign-up' ? 'Register' : 'Continue';
+  const alternateErrorText =
+    action === 'sign-up'
+      ? 'Email is already registered'
+      : 'Incorrect email or password';
 
   return (
     <form onSubmit={handleSubmit}>
@@ -37,8 +39,9 @@ export default function AuthForm({ action, onSignIn }) {
           <input
             required
             autoFocus
+            autoComplete="off"
             type="text"
-            name="username"
+            name="email"
             className="form-control"
           />
         </label>
@@ -70,7 +73,7 @@ export default function AuthForm({ action, onSignIn }) {
           <Link className="link-switch">Continue as guest</Link>
         </small>
       </div>
-      {error && <div style={{ color: 'red' }}>Error: {error.message}</div>}
+      {error && <div style={{ color: 'red' }}>{alternateErrorText}</div>}
     </form>
   );
 }

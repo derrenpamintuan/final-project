@@ -1,9 +1,23 @@
+.details-background {
+  height: 100vh;
+  overflow-y: scroll;
+  background-image: url('https://media.istockphoto.com/id/1001851616/photo/abstract-blur-image-of-night-festival-in-a-restaurant-and-the-atmosphere-is-happy-and-relaxing.jpg?s=612x612&w=0&k=20&c=vRDFQeAsuHBDPBiehamNwsu4mke88lZXJfqfah0k8Jk=');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
 .details-container {
-  max-width: 400px;
+  max-width: 450px;
   display: flex;
   flex-direction: column;
   line-height: 1.2;
   margin: auto;
+  background-color: white;
+  padding: 0 10px;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
 }
 
 img.details-picture {

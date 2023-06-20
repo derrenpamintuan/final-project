@@ -52,7 +52,6 @@ export default function Search() {
           <input
             required
             autoFocus
-            autoComplete="off"
             type="text"
             name="location"
             className="form-control"

@@ -9,6 +9,8 @@ nav {
 .nav-title {
   color: white;
   font-family: Salsa, cursive;
+  filter: drop-shadow(-2px 2px 1px black);
+  cursor: default;
 }
 
 @media screen and (width >= 500px) {
@@ -32,6 +34,10 @@ nav {
   color: white;
 }
 
+.fa-bars:active {
+  color: black;
+}
+
 @media screen and (width >= 500px) {
   .fa-bars {
     display: none;
@@ -49,6 +55,16 @@ p.menu-options {
   margin: 8px 0;
   font-weight: bold;
   cursor: pointer;
+  transition-duration: 0.3s;
+}
+
+p.menu-options:hover {
+  color: black;
+  font-size: 17px;
+}
+
+p.menu-options:active {
+  color: white;
 }
 
 @media screen and (width >= 500px) {

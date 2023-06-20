@@ -1,10 +1,29 @@
+import { useParams } from 'react-router-dom';
 import { useContext } from 'react';
-import AppContext from './AppContext';
+import AppContext from '../components/AppContext';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { BsStarFill, BsStar } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import './RestaurantDetails.css';
 
-export default function RestaurantList() {
+export default function RestaurantDetails() {
+  const { restaurantId } = useParams();
   const { restaurants } = useContext(AppContext);
+  const restaurantArr = restaurants.filter(
+    (restaurant) => restaurant.id === restaurantId
+  );
+  const restaurant = restaurantArr[0];
+  console.log(restaurant);
+
+  function displayPrice(price) {
+    if (price === undefined) return '$';
+    return price;
+  }
+
+  function metersToMiles(meters) {
+    const miles = meters * 0.00062137;
+    return Math.round(miles * 10) / 10;
+  }
 
   function displayRatings(rating) {
     switch (rating) {
@@ -111,72 +130,64 @@ export default function RestaurantList() {
     }
   }
 
-  function displayPrice(price) {
-    if (price === undefined) return '$';
-    return price;
+  function displayCategories(categories) {
+    return categories.map((category) => category.title + '\n');
   }
 
-  function metersToMiles(meters) {
-    const miles = meters * 0.00062137;
-    return Math.round(miles * 10) / 10;
-  }
-
-  let resultNumber = 1;
-
-  function countResults() {
-    return resultNumber++;
-  }
-
-  function returnEmpty(restaurants) {
-    if (restaurants.length === 0) {
-      return (
-        <div className="no-results-container">
-          <p className="no-results">No results</p>
-          <Link className="return-home" to="/">
-            Return Home
-          </Link>
-        </div>
-      );
-    }
+  function displayAddress(address) {
+    return address.join(' ');
   }
 
   return (
-    <>
-      {returnEmpty(restaurants)}
-      <ul className="search-list">
-        {restaurants.map((restaurant) => (
-          <Link
-            key={restaurant.id}
-            className="restaurant-link"
-            to={`/details/${restaurant.id}`}>
-            <li className="result-container">
-              <img
-                className="restaurant-image"
-                src={restaurant.image_url}
-                alt="Restaurant, Business, Food"
-              />
-              <div className="restaurant-details">
-                <p className="restaurant-name">
-                  {countResults()}. {restaurant.name}
-                </p>
-                <div className="ratings-container">
-                  {displayRatings(restaurant.rating)}
-                  <p className="restaurant-reviews">
-                    {restaurant.review_count} reviews
-                  </p>
-                </div>
-                <div className="restaurant-extra-details">
-                  <p className="details">
-                    {restaurant.location.city} |{' '}
-                    {displayPrice(restaurant.price)} |{' '}
-                    {metersToMiles(restaurant.distance)} mi
-                  </p>
-                </div>
-              </div>
-            </li>
-          </Link>
-        ))}
-      </ul>
-    </>
+    <div className="details-container">
+      <img
+        className="details-picture"
+        src={restaurant.image_url}
+        alt="Restaurant, Business, Food"></img>
+      <p className="save-to-list">
+        Save To List <FaRegHeart className="empty-heart" />
+      </p>
+      <div className="details-text-container">
+        <h2 className="details-title">{restaurant.name}</h2>
+        <div className="ratings-container">
+          {displayRatings(restaurant.rating)}
+          <p className="restaurant-reviews">
+            {restaurant.review_count} reviews
+          </p>
+        </div>
+        <p className="details">
+          {metersToMiles(restaurant.distance)} miles away
+        </p>
+        <div className="restaurant-extra-details">
+          <p className="details">
+            {restaurant.location.city} | {displayPrice(restaurant.price)}
+          </p>
+        </div>
+        <div className="info-container">
+          <div className="categories">
+            <p className="categories-title">Categories:</p>
+            <p className="categories-info">
+              {displayCategories(restaurant.categories)}
+            </p>
+          </div>
+          <div className="address">
+            <p className="address-title">Address:</p>
+            <p className="address-info">
+              {displayAddress(restaurant.location.display_address)}
+            </p>
+          </div>
+          <div className="phone">
+            <p className="phone-title">Phone:</p>
+            <p className="phone-info">{restaurant.display_phone}</p>
+          </div>
+          <div className="url">
+            <p className="url-title">More Information:</p>
+            <Link to={restaurant.url}>
+              <p className="url-info">Yelp page</p>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

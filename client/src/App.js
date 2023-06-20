@@ -6,6 +6,7 @@ import Auth from './pages/AuthPage';
 import Home from './pages/HomePage';
 import NotFound from './pages/NotFoundPage';
 import Results from './pages/ResultsPage';
+import RestaurantDetails from './pages/RestaurantDetails';
 import { useNavigate } from 'react-router-dom';
 
 const tokenKey = 'react-context-jwt';
@@ -66,6 +67,7 @@ export default function App() {
           <Route path="sign-in" element={<Auth action="sign-in" />} />
           <Route path="sign-up" element={<Auth action="sign-up" />} />
           <Route path="results" element={<Results />} />
+          <Route path="details/:restaurantId" element={<RestaurantDetails />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

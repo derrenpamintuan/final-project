@@ -1,0 +1,69 @@
+.details-container {
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  margin: auto;
+}
+
+img.details-picture {
+  min-width: 100%;
+  height: 275px;
+  object-fit: cover;
+}
+
+.save-to-list {
+  margin: 0;
+  text-align: right;
+}
+
+.empty-heart {
+  position: relative;
+  top: 3px;
+  font-size: larger;
+  margin-right: 10px;
+}
+
+.details-text-container {
+  margin: 3px 10px 0;
+}
+
+.details-title {
+  margin: 0;
+  font-weight: 400;
+}
+
+.info-container {
+  border: rgb(217 217 217) solid 1px;
+  border-radius: 7px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.categories,
+.categories-title {
+  margin: 0;
+}
+
+.categories,
+.address,
+.phone {
+  border-bottom: rgb(217 217 217) solid 1px;
+}
+
+.categories-info {
+  white-space: pre;
+  margin: 5px 0 7px 10px;
+}
+
+.address-title,
+.phone-title,
+.url-title {
+  margin: 10px 0 0;
+}
+
+.address-info,
+.phone-info,
+.url-info {
+  margin: 5px 0 7px 10px;
+}

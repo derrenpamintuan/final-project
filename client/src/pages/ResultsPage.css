@@ -12,6 +12,10 @@
   background-attachment: fixed;
 }
 
+.search-results::-webkit-scrollbar {
+  display: none;
+}
+
 .search-list {
   list-style-type: none;
   margin: 0 0 25px;
@@ -33,10 +37,6 @@
 }
 
 @media screen and (width >=1000px) {
-  .search-results {
-    height: 100vh;
-  }
-
   .search-list {
     max-width: 940px;
   }
@@ -44,11 +44,16 @@
 
 .result-container {
   display: flex;
-  background-color: rgba(217, 217, 217, 1);
+  background-color: rgba(217, 217, 217);
   width: 300px;
   padding: 5px;
   border-radius: 7px;
   margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.result-container:hover {
+  background-color: rgb(193, 193, 193);
 }
 
 img.restaurant-image {
@@ -113,4 +118,9 @@ div.no-results-container {
 
 .return-home {
   color: white;
+}
+
+.restaurant-link {
+  color: black;
+  text-decoration: none;
 }

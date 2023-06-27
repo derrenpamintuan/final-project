@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import 'dotenv/config';
 import express from 'express';
 import errorMiddleware from './lib/error-middleware.js';
@@ -15,12 +16,10 @@ const db = new pg.Pool({
 
 const app = express();
 
-// Create paths for static directories
 const reactStaticDir = new URL('../client/build', import.meta.url).pathname;
 const uploadsStaticDir = new URL('public', import.meta.url).pathname;
 
 app.use(express.static(reactStaticDir));
-// Static directory for file uploads server/public/
 app.use(express.static(uploadsStaticDir));
 app.use(express.json());
 
@@ -76,17 +75,93 @@ app.post('/api/auth/sign-in', async (req, res, next) => {
   }
 });
 
-/**
- * Serves React's index.html if no api route matches.
- *
- * Implementation note:
- * When the final project is deployed, this Express server becomes responsible
- * for serving the React files. (In development, the Create React App server does this.)
- * When navigating in the client, if the user refreshes the page, the browser will send
- * the URL to this Express server instead of to React Router.
- * Catching everything that doesn't match a route and serving index.html allows
- * React Router to manage the routing.
- */
+app.post('/api/saved', async (req, res, next) => {
+  try {
+    console.log('here');
+    console.log(req.body.restaurant);
+    const { userId } = req.body.user;
+    const {
+      id,
+      image_url,
+      name,
+      rating,
+      review_count,
+      location,
+      price = '$',
+      categories,
+      display_phone,
+      url,
+    } = req.body.restaurant;
+    if (
+      !image_url ||
+      !name ||
+      !rating ||
+      !review_count ||
+      !location ||
+      !price ||
+      !categories ||
+      !display_phone ||
+      !url ||
+      !userId
+    ) {
+      throw new ClientError(400, 'missing fields');
+    }
+    const sql = `
+      insert into "entries" ("yelpId", "photoUrl", "title", "rating", "reviews", "city", "price", "categories", "address", "phone", "yelpUrl", "userId")
+        values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+        returning "yelpId", "photoUrl", "title", "rating", "reviews", "city", "price", "categories", "address", "phone", "yelpUrl", "userId"
+    `;
+    const params = [
+      id,
+      image_url,
+      name,
+      rating,
+      review_count,
+      location.city,
+      price,
+      categories,
+      JSON.stringify(location.display_address.join(' ')).replace(/"/g, ''),
+      display_phone,
+      url,
+      userId,
+    ];
+    const result = await db.query(sql, params);
+    const [entry] = result.rows;
+    res.status(201).json(entry);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.get('/api/saved/:userId', async (req, res, next) => {
+  const { userId } = req.params;
+  const sql = `
+    select *
+      from "entries"
+      where "userId" = $1
+  `;
+
+  const params = [userId];
+  const result = await db.query(sql, params);
+  const entries = result.rows;
+  res.status(201).json(entries);
+});
+
+app.get('/api/saved/details/:restaurantId', async (req, res, next) => {
+  const restaurantId = req.params.restaurantId;
+  const userId = req.query.userId;
+
+  const sql = `
+    select *
+      from "entries"
+      where "userId" = $1 and "yelpId" = $2
+  `;
+  const params = [userId, restaurantId];
+  const result = await db.query(sql, params);
+  const [entry] = result.rows;
+  res.status(201).json(entry);
+});
+
 app.get('*', (req, res) => res.sendFile(`${reactStaticDir}/index.html`));
 
 app.use(errorMiddleware);

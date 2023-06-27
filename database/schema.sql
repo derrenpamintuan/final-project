@@ -18,6 +18,7 @@ CREATE TABLE "public"."users" (
 
 
 CREATE TABLE "public"."entries" (
+  "yelpId" TEXT NOT NULL,
 	"entryId" serial NOT NULL,
 	"photoUrl" TEXT NOT NULL,
 	"title" TEXT NOT NULL,

@@ -1,10 +1,23 @@
-import { useContext } from 'react';
-import AppContext from './AppContext';
+import { useEffect, useState, useContext } from 'react';
 import { BsStarFill, BsStar } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import AppContext from '../components/AppContext';
 
-export default function RestaurantList() {
-  const { restaurants } = useContext(AppContext);
+export default function SavedPage() {
+  const [savedRestaurants, setSavedRestaurants] = useState([]);
+  const { user } = useContext(AppContext);
+  const userId = user ? user.userId : null;
+
+  useEffect(() => {
+    if (userId) {
+      async function getSaved() {
+        const result = await fetch(`/api/saved/${userId}`);
+        const data = await result.json();
+        setSavedRestaurants(data);
+      }
+      getSaved();
+    }
+  }, [userId]);
 
   function displayRatings(rating) {
     switch (rating) {
@@ -116,17 +129,6 @@ export default function RestaurantList() {
     return price;
   }
 
-  function metersToMiles(meters) {
-    const miles = meters * 0.00062137;
-    return Math.round(miles * 10) / 10;
-  }
-
-  let resultNumber = 1;
-
-  function countResults() {
-    return resultNumber++;
-  }
-
   function returnEmpty(restaurants) {
     if (restaurants.length === 0) {
       return (
@@ -142,42 +144,47 @@ export default function RestaurantList() {
 
   return (
     <>
-      {returnEmpty(restaurants)}
-      <ul className="search-list">
-        {restaurants.map((restaurant) => (
-          <Link
-            key={restaurant.id}
-            className="restaurant-link"
-            to={`/details/${restaurant.id}`}>
-            <li className="result-container">
-              <img
-                className="restaurant-image"
-                src={restaurant.image_url}
-                alt="Restaurant, Business, Food"
-              />
-              <div className="restaurant-details">
-                <p className="restaurant-name">
-                  {countResults()}. {restaurant.name}
-                </p>
-                <div className="ratings-container">
-                  {displayRatings(restaurant.rating)}
-                  <p className="restaurant-reviews">
-                    {restaurant.review_count} reviews
-                  </p>
-                </div>
-                <div className="restaurant-extra-details">
-                  <p className="details">
-                    {restaurant.location.city} <span className="or">|</span>{' '}
-                    {displayPrice(restaurant.price)}{' '}
-                    <span className="or">|</span>{' '}
-                    {metersToMiles(restaurant.distance)} mi
-                  </p>
-                </div>
-              </div>
-            </li>
-          </Link>
-        ))}
-      </ul>
+      <div className="search-results">
+        <header className="results-title">
+          <h1 className="title-container">Saved</h1>
+        </header>
+        <div className="break"></div>
+        <div className="results-container">
+          {returnEmpty(savedRestaurants)}
+          <ul className="search-list">
+            {savedRestaurants.map((restaurant) => (
+              <Link
+                key={restaurant.id}
+                className="restaurant-link"
+                to={`/saved/details/${restaurant.yelpId}`}>
+                <li className="result-container">
+                  <img
+                    className="restaurant-image"
+                    src={restaurant.photoUrl}
+                    alt="Restaurant, Business, Food"
+                  />
+                  <div className="restaurant-details">
+                    <p className="restaurant-name">{restaurant.title}</p>
+                    <div className="ratings-container">
+                      {displayRatings(restaurant.rating)}
+                      <p className="restaurant-reviews">
+                        {restaurant.review_count} reviews
+                      </p>
+                    </div>
+                    <div className="restaurant-extra-details">
+                      <p className="details">
+                        City: {restaurant.city}
+                        <div className="break"></div>
+                        Price: {displayPrice(restaurant.price)}
+                      </p>
+                    </div>
+                  </div>
+                </li>
+              </Link>
+            ))}
+          </ul>
+        </div>
+      </div>
     </>
   );
 }

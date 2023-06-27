@@ -1,3 +1,12 @@
+.details-container {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  margin: auto;
+  background-color: white;
+}
+
 @media screen and (width >=500px) {
   .details-background {
     height: 100vh;
@@ -8,21 +17,15 @@
     background-attachment: fixed;
   }
 
-  .details-container {
-    padding: 0 10px;
-    border-right: 1px solid black;
-    border-bottom: 1px solid black;
-    border-left: 1px solid black;
+  .details-background::-webkit-scrollbar {
+    display: none;
   }
-}
 
-.details-container {
-  max-width: 450px;
-  display: flex;
-  flex-direction: column;
-  line-height: 1.2;
-  margin: auto;
-  background-color: white;
+  .details-container {
+    padding: 10px 10px 0;
+    margin: 10px auto;
+    border: 2px solid rgb(217, 217, 217);
+  }
 }
 
 img.details-picture {
@@ -32,15 +35,29 @@ img.details-picture {
 }
 
 .save-to-list {
-  margin: 0;
-  text-align: right;
+  width: fit-content;
+  align-self: flex-end;
+  margin: 3px 5px 0 0;
+  cursor: pointer;
 }
 
-.empty-heart {
+.saved-to-list {
+  width: fit-content;
+  align-self: flex-end;
+  margin: 3px 5px 0 0;
+  cursor: default;
+}
+
+.empty-heart,
+.full-heart {
   position: relative;
-  top: 3px;
+  top: 2px;
+  right: 2px;
   font-size: larger;
-  margin-right: 10px;
+}
+
+.full-heart {
+  color: red;
 }
 
 .details-text-container {
@@ -76,13 +93,25 @@ img.details-picture {
 }
 
 .address-title,
-.phone-title,
-.url-title {
+.phone-title {
   margin: 10px 0 0;
 }
 
+.url-title {
+  margin: 10px 0 5px;
+}
+
 .address-info,
-.phone-info,
-.url-info {
+.phone-info {
   margin: 5px 0 7px 10px;
+}
+
+.url-info {
+  margin-left: 10px;
+}
+
+.or {
+  position: relative;
+  font-weight: bold;
+  font-size: 15px;
 }

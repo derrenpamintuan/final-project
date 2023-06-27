@@ -49,7 +49,7 @@ export default function Navbar() {
               }}>
               <FaSignOutAlt className="menu-icon" />
               Sign Out
-            </p>{' '}
+            </p>
           </div>
         )}
       </nav>

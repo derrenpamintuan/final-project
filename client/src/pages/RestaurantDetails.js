@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import AppContext from '../components/AppContext';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { BsStarFill, BsStar } from 'react-icons/bs';
@@ -9,12 +9,12 @@ import './RestaurantDetails.css';
 
 export default function RestaurantDetails() {
   const { restaurantId } = useParams();
-  const { restaurants } = useContext(AppContext);
+  const { restaurants, user } = useContext(AppContext);
+  const [isSaved, setIsSaved] = useState(false);
   const restaurantArr = restaurants.filter(
     (restaurant) => restaurant.id === restaurantId
   );
   const restaurant = restaurantArr[0];
-  console.log(restaurant);
 
   if (!restaurant) {
     return <NotFoundPage />;
@@ -143,6 +143,33 @@ export default function RestaurantDetails() {
     return address.join(' ');
   }
 
+  function setSaveText() {
+    if (isSaved === false) {
+      return (
+        <p className="save-to-list" onClick={handleAddToFavorites}>
+          Save To List <FaRegHeart className="empty-heart" />
+        </p>
+      );
+    }
+    return (
+      <p className="saved-to-list">
+        Saved To List <FaHeart className="full-heart" />
+      </p>
+    );
+  }
+
+  async function handleAddToFavorites() {
+    const req = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ restaurant, user }),
+    };
+    await fetch(`/api/saved`, req);
+    setIsSaved(true);
+  }
+
   return (
     <div className="details-background">
       <div className="details-container">
@@ -150,9 +177,7 @@ export default function RestaurantDetails() {
           className="details-picture"
           src={restaurant.image_url}
           alt="Restaurant, Business, Food"></img>
-        <p className="save-to-list">
-          Save To List <FaRegHeart className="empty-heart" />
-        </p>
+        {setSaveText()}
         <div className="details-text-container">
           <h2 className="details-title">{restaurant.name}</h2>
           <div className="ratings-container">
@@ -166,7 +191,8 @@ export default function RestaurantDetails() {
           </p>
           <div className="restaurant-extra-details">
             <p className="details">
-              {restaurant.location.city} | {displayPrice(restaurant.price)}
+              {restaurant.location.city} <span className="or">|</span>{' '}
+              {displayPrice(restaurant.price)}
             </p>
           </div>
           <div className="info-container">
@@ -188,8 +214,8 @@ export default function RestaurantDetails() {
             </div>
             <div className="url">
               <p className="url-title">More Information:</p>
-              <Link to={restaurant.url}>
-                <p className="url-info">Yelp page</p>
+              <Link to={restaurant.url} className="url-info">
+                Yelp page
               </Link>
             </div>
           </div>

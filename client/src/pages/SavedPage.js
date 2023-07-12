@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from 'react';
 import { BsStarFill, BsStar } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import AppContext from '../components/AppContext';
+import './SavedPage.css';
 
 export default function SavedPage() {
   const [savedRestaurants, setSavedRestaurants] = useState([]);
@@ -144,7 +145,7 @@ export default function SavedPage() {
 
   return (
     <>
-      <div className="search-results">
+      <div className="saved-results">
         <header className="results-title">
           <h1 className="title-container">Saved</h1>
         </header>
@@ -154,7 +155,7 @@ export default function SavedPage() {
           <ul className="search-list">
             {savedRestaurants.map((restaurant) => (
               <Link
-                key={restaurant.id}
+                key={restaurant.yelpId}
                 className="restaurant-link"
                 to={`/saved/details/${restaurant.yelpId}`}>
                 <li className="result-container">
@@ -168,13 +169,12 @@ export default function SavedPage() {
                     <div className="ratings-container">
                       {displayRatings(restaurant.rating)}
                       <p className="restaurant-reviews">
-                        {restaurant.review_count} reviews
+                        {restaurant.reviews} reviews
                       </p>
                     </div>
                     <div className="restaurant-extra-details">
                       <p className="details">
-                        City: {restaurant.city}
-                        <div className="break"></div>
+                        City: {restaurant.city} <br />
                         Price: {displayPrice(restaurant.price)}
                       </p>
                     </div>

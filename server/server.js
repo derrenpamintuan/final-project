@@ -77,8 +77,6 @@ app.post('/api/auth/sign-in', async (req, res, next) => {
 
 app.post('/api/saved', async (req, res, next) => {
   try {
-    console.log('here');
-    console.log(req.body.restaurant);
     const { userId } = req.body.user;
     const {
       id,
@@ -119,7 +117,9 @@ app.post('/api/saved', async (req, res, next) => {
       review_count,
       location.city,
       price,
-      categories,
+      JSON.stringify(
+        categories.map((category) => category.title).join()
+      ).replace(/"/g, ''),
       JSON.stringify(location.display_address.join(' ')).replace(/"/g, ''),
       display_phone,
       url,

@@ -118,8 +118,8 @@ app.post('/api/saved', async (req, res, next) => {
       location.city,
       price,
       JSON.stringify(
-        categories.map((category) => category.title).join()
-      ).replace(/"/g, ''),
+        categories.map((category) => category.title).join(', ')
+      ).replace(/"([^"]+)":/g, '$1:'),
       JSON.stringify(location.display_address.join(' ')).replace(/"/g, ''),
       display_phone,
       url,

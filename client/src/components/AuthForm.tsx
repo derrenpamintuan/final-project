@@ -4,7 +4,7 @@ import { signUpOrIn } from '../lib';
 
 export default function AuthForm({ action, onSignIn }) {
   const navigate = useNavigate();
-  const [error, setError] = useState();
+  const [error, setError] = useState<unknown>();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -69,11 +69,8 @@ export default function AuthForm({ action, onSignIn }) {
           </Link>
         </small>
         <p className="or">OR</p>
-        <small>
-          <Link className="link-switch">Continue as guest</Link>
-        </small>
       </div>
-      {error && <div style={{ color: 'red' }}>{alternateErrorText}</div>}
+      {!!error && <div style={{ color: 'red' }}>{alternateErrorText}</div>}
     </form>
   );
 }

@@ -4,7 +4,7 @@ import AppContext from './AppContext';
 
 export default function Search() {
   const navigate = useNavigate();
-  const [error, setError] = useState();
+  const [error, setError] = useState<unknown>();
 
   const { setRestaurants, setSearchTerm, setLocation } = useContext(AppContext);
 
@@ -77,7 +77,7 @@ export default function Search() {
           Search
         </button>
       </div>
-      {error && (
+      {!!error && (
         <div className="location-error" style={{ color: 'red' }}>
           Invalid location
         </div>

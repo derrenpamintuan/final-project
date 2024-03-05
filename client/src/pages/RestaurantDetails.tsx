@@ -1,9 +1,8 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useContext } from 'react';
 import AppContext from '../components/AppContext';
-import { FaHeart, FaRegHeart } from 'react-icons/fa';
+import { FaRegHeart } from 'react-icons/fa';
 import { BsStarFill, BsStar } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
 import NotFoundPage from './NotFoundPage';
 import './RestaurantDetails.css';
 

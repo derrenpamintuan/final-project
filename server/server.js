@@ -6,8 +6,11 @@ import argon2 from 'argon2';
 import ClientError from './lib/client-error.js';
 import jwt from 'jsonwebtoken';
 
+const connectionString =
+  process.env.DATABASE_URL ||
+  `postgresql://${process.env.RDS_USERNAME}:${process.env.RDS_PASSWORD}@${process.env.RDS_HOSTNAME}:${process.env.RDS_PORT}/${process.env.RDS_DB_NAME}`;
 const db = new pg.Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString,
   ssl: {
     rejectUnauthorized: false,
   },
@@ -16,7 +19,7 @@ const db = new pg.Pool({
 const app = express();
 
 // Create paths for static directories
-const reactStaticDir = new URL('../client/build', import.meta.url).pathname;
+const reactStaticDir = new URL('../client/dist', import.meta.url).pathname;
 const uploadsStaticDir = new URL('public', import.meta.url).pathname;
 
 app.use(express.static(reactStaticDir));

@@ -1,4 +1,1 @@
-{
-  "bracketSameLine": true,
-  "singleQuote": true
-}
+"./node_modules/@learningfuze/lfz-config/config/prettierrc.json"

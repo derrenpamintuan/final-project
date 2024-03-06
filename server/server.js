@@ -1,10 +1,13 @@
 import 'dotenv/config';
 import express from 'express';
-import errorMiddleware from './lib/error-middleware.js';
 import pg from 'pg';
 import argon2 from 'argon2';
-import ClientError from './lib/client-error.js';
 import jwt from 'jsonwebtoken';
+import {
+  ClientError,
+  errorMiddleware,
+  defaultMiddleware,
+} from './lib/index.js';
 
 const connectionString =
   process.env.DATABASE_URL ||
@@ -91,6 +94,8 @@ app.post('/api/auth/sign-in', async (req, res, next) => {
  * React Router to manage the routing.
  */
 app.get('*', (req, res) => res.sendFile(`${reactStaticDir}/index.html`));
+
+app.use(defaultMiddleware(reactStaticDir));
 
 app.use(errorMiddleware);
 

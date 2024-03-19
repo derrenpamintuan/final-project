@@ -1,8 +1,10 @@
-import { useContext, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, Outlet } from 'react-router-dom';
 import AppContext from '../components/AppContext';
 import { FaBars, FaHeart, FaSignOutAlt } from 'react-icons/fa';
 import { IoRestaurant, IoHomeSharp } from 'react-icons/io5';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './NavBar.css';
 
 export default function Navbar() {
@@ -47,7 +49,7 @@ export default function Navbar() {
               }}>
               <FaSignOutAlt className="menu-icon" />
               Sign Out
-            </p>{' '}
+            </p>
           </div>
         )}
       </nav>

@@ -1,0 +1,17 @@
+.saved-results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  align-content: flex-start;
+  height: 100vh;
+  overflow-y: scroll;
+  background-image: url('https://www.discoverlosangeles.com/sites/default/files/styles/hero/public/images/2019-01/lucques10.jpg?itok=GSPvYQUr');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.saved-results::-webkit-scrollbar {
+  display: none;
+}

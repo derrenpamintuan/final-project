@@ -11,12 +11,17 @@ nav {
   font-family: Salsa, cursive;
   filter: drop-shadow(-2px 2px 1px black);
   cursor: default;
+  transition: 1s;
 }
 
-@media screen and (width >= 500px) {
+@media screen and (width >=500px) {
   .nav-title {
     position: absolute;
     left: 30px;
+  }
+
+  .nav-title:hover {
+    color: rgb(0, 0, 0);
   }
 }
 
@@ -38,7 +43,7 @@ nav {
   color: black;
 }
 
-@media screen and (width >= 500px) {
+@media screen and (width >=500px) {
   .fa-bars {
     display: none;
   }
@@ -67,7 +72,7 @@ p.menu-options:active {
   color: white;
 }
 
-@media screen and (width >= 500px) {
+@media screen and (width >=500px) {
   .menu-container {
     display: none;
   }
@@ -94,7 +99,7 @@ p.menu-options:active {
   margin-right: 5px;
 }
 
-@media screen and (width >= 500px) {
+@media screen and (width >=500px) {
   .menu-icon {
     position: relative;
     top: 1px;

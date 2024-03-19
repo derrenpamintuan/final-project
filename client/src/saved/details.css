@@ -1,0 +1,14 @@
+@media screen and (width >=500px) {
+  .saved-background {
+    height: 100vh;
+    overflow-y: scroll;
+    background-image: url('https://www.discoverlosangeles.com/sites/default/files/styles/hero/public/images/2019-01/lucques10.jpg?itok=GSPvYQUr');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  .saved-background::-webkit-scrollbar {
+    display: none;
+  }
+}

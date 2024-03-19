@@ -6,6 +6,8 @@ import Auth from './pages/AuthPage';
 import Home from './pages/HomePage';
 import NotFound from './pages/NotFoundPage';
 import Results from './pages/ResultsPage';
+import SavedPage from './pages/SavedPage';
+import SavedDetails from './pages/saved/details';
 import RestaurantDetails from './pages/RestaurantDetails';
 import { useNavigate } from 'react-router-dom';
 
@@ -40,10 +42,10 @@ export default function App() {
   }
 
   function handleSignOut() {
+    navigate('/sign-in');
     localStorage.removeItem(tokenKey);
     setUser(undefined);
     setToken(undefined);
-    navigate('/sign-in');
   }
 
   const contextValue = {
@@ -67,6 +69,11 @@ export default function App() {
           <Route path="sign-in" element={<Auth action="sign-in" />} />
           <Route path="sign-up" element={<Auth action="sign-up" />} />
           <Route path="results" element={<Results />} />
+          <Route path="saved" element={<SavedPage />} />
+          <Route
+            path="saved/details/:restaurantId"
+            element={<SavedDetails />}
+          />
           <Route path="details/:restaurantId" element={<RestaurantDetails />} />
           <Route path="*" element={<NotFound />} />
         </Route>

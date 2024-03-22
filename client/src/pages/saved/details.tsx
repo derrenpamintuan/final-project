@@ -5,7 +5,7 @@ import AppContext from '../../components/AppContext';
 import './details.css';
 
 export default function SavedDetails() {
-  const [savedRestaurant, setSavedRestaurant] = useState({});
+  const [savedRestaurant, setSavedRestaurant] = useState<any>({});
   const { user } = useContext(AppContext);
   const userId = user ? user.userId : null;
   const { restaurantId } = useParams();

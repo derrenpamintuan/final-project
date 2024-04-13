@@ -32,6 +32,9 @@ Try the application live at [final-project-dev22222.us-west-1.elasticbeanstalk.c
 
 ## Preview
 
+![Feature 2](client/public/feature2.gif)
+![Feature 3](client/public/feature3.gif)
+
 ### Stretch Features
 
 - Users can rate a restaurant

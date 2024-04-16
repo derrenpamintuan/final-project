@@ -52,7 +52,7 @@ Try the application live at [final-project-dev22222.us-west-1.elasticbeanstalk.c
 1. Clone the repository.
 
    ```shell
-   git clone https://github.com/derrenpamintuan/final-project
+   git clone https://github.com/derrenpamintuan/final-project.git
    cd final-project
    ```
 

@@ -19,7 +19,7 @@ As a food enthusiast myself, I wanted to build an application that helps people 
 
 ## Live Demo
 
-Try the application live at final-project-dev22222.us-west-1.elasticbeanstalk.com
+Try the application live at http://final-project-dev22222.us-west-1.elasticbeanstalk.com
 
 ## Features
 

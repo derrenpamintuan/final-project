@@ -35,7 +35,7 @@ export default function AuthForm({ action, onSignIn }) {
     <form onSubmit={handleSubmit}>
       <div className="email">
         <label>
-          <p className="email-label">Email</p>
+          <p className="email-label">Username</p>
           <input
             required
             autoFocus
@@ -68,7 +68,6 @@ export default function AuthForm({ action, onSignIn }) {
             {alternateActionText}
           </Link>
         </small>
-        <p className="or">OR</p>
       </div>
       {!!error && <div style={{ color: 'red' }}>{alternateErrorText}</div>}
     </form>

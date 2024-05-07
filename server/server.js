@@ -168,6 +168,21 @@ app.get('/api/saved/details/:restaurantId', async (req, res, next) => {
   res.status(201).json(entry);
 });
 
+app.get('/api/details/:restaurantId', async (req, res, next) => {
+  const restaurantId = req.params.restaurantId;
+  const userId = req.query.userId;
+
+  const sql = `
+    select *
+      from "entries"
+      where "userId" = $1 and "yelpId" = $2
+  `;
+  const params = [userId, restaurantId];
+  const result = await db.query(sql, params);
+  const [entry] = result.rows;
+  res.status(201).json(entry);
+});
+
 app.get('*', (req, res) => res.sendFile(`${reactStaticDir}/index.html`));
 
 app.use(defaultMiddleware(reactStaticDir));
